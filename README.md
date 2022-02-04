@@ -1,25 +1,31 @@
-# Alchemy React Base Template
+# React Movie Builder App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+**Visit the live demo here:** [Live Demo](https://sad-pike-d255ed.netlify.app/)
 
-Use this template for all your "from scratch" deliverables. To start, simply run
+| User should be able to . . .                                                         |             |
+| :----------------------------------------------------------------------------------- | ----------: |
+| Visit the deployed app on Netlify, with link in the About section of the Github repo |  **required for grading** |
 
-- `npm install`
-- `npm start`
+| Events                                                                                |             |
+| :----------------------------------------------------------------------------------- | ----------: |
+| On changing the movie form, the current movie item updates |        1 |
+| On submitting the movie form, a new movie is added to the view  |        2 |
+| On clicking a movie (when a filter is not active -- this is a bug that would requre useEffect to fix correctly) the movie gets deleted  |        1 |
+| On typing in the filter input, the movies are filtered by name  |        2 |
 
-## Available Scripts
+| Components                                                                                |             |
+| :----------------------------------------------------------------------------------- | ----------: |
+| `App()` : tracks state for `allMovies`,  `filteredMovies`, `movieFormYearReleased`, `movieFormDirector`, `movieTitle`, `movieFormColor` |1|
+| `App()` : passes state as props correctly to `MovieForm`, `Movie`, and `MovieList` |1|
+| `App()` : define a `submitMovie` function that adds a new movie to the array using form state. Note that this function gets passed down to the movie form, which is where it will be attached to a submit listener |2|
+| `App()` : define a `handleDeleteMovie` function that deleted a movie from the state array using id |2|
+| `App()` : define a `handleFilterMovies` function that takes in a string and set `filteredMovies` to an array of movies whose name matches that string |2|
+| `MovieForm({ setMovieFormName, movieFormYearReleased, setMovieFormTitle, movieFormDirector, setMovieFormColor, movieFormColor, submitMovie })` : on change for each input, call the appropriate state handler prop with the correct `e.target.value` to update `App.js` state.  |2|
+| `MovieForm({ setMovieFormName, movieFormYearReleased, setMovieFormTitle, movieFormDirector, setMovieFormColor, movieFormColor, submitMovie })` : on submit, add a movie to state by calling `props.submitMovie` in the correct way.  |2|
+| `MovieList({ movies })` : takes in a `movies` prop and renders a list of `Movie` components. |1|
+| `Movie({ movie })` : takes in a movie and renders it with the correct color background |1|
 
-In the project directory, you can run:
-
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Stretch goal ideas:
+- Note that the delete functionality doesn't work if the filter is active. Why is that? Can you fix it?
+- Track the `query` as state. Use `useEffect` to filter the movies every time this query changes.
+- What if instead of just adding movies to state, you added them to supabase and made your data persistent (fetching from supabase on load)?
