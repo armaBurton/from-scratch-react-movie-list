@@ -1,11 +1,11 @@
 import './App.css';
-import { useEffect } from 'react';
 import { useStateForm } from './useStateForm';
 import CurrentMovie from './CurrentMovie';
 import MovieForm from './MovieForm';
 import RenderMovies from './RenderMovies';
 
 function App() {
+
   const {
     allMovies, setAllMovies,
     filteredMovies, setFilteredMovies,
@@ -25,28 +25,6 @@ function App() {
     console.log('click');
   }
 
-  // useEffect(() => {
-
-  //   if (finishedCard){
-  //     const movie = {
-  //       title: movieFormTitle,
-  //       director: movieFormDirector,
-  //       year: movieFormYearReleased,
-  //       color: movieFormColor,
-  //       card: finishedCard,
-  //     };
-
-  //     addMovie(movie);
-    
-  //     setMovieFormTitle(``);
-  //     setMovieFormDirector(``);
-  //     setMovieFormYearReleased(``);
-  //     setMovieFormColor(`transparent`);
-  //     setFinishedCard(false);
-  //   }
-    
-  // }, [finishedCard]);
-
   return <div className='container-div'>
     <section className='current-movie'>
       {movieFormTitle || movieFormDirector || movieFormYearReleased ? <CurrentMovie 
@@ -56,6 +34,7 @@ function App() {
           year: movieFormYearReleased,
           color: movieFormColor,
           card: finishedCard,
+          id:''
         }} /> : ''}
     </section>
     <section className='filter-section'></section>
