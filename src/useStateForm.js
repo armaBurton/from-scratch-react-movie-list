@@ -1,19 +1,21 @@
 import { useState } from 'react';
 
 export function useStateForm(){
-  const [allMovies, setAllMovies] = useState();
-  const [filteredMovies, setFilteredMovies] = useState();
-  const [movieFormYearReleased, setMovieFormYearReleased] = useState();
-  const [movieFormDirector, setMovieFromDirector] = useState();
-  const [movieFormTitle, setMovieFormTitle] = useState();
-  const [movieFormColor, setMovieFromColor] = useState();
+  const [allMovies, setAllMovies] = useState([]);
+  const [filteredMovies, setFilteredMovies] = useState([]);
+  const [movieFormYearReleased, setMovieFormYearReleased] = useState(0);
+  const [movieFormDirector, setMovieFormDirector] = useState('');
+  const [movieFormTitle, setMovieFormTitle] = useState('');
+  const [movieFormColor, setMovieFormColor] = useState('transparent');
+  const [finishedCard, setFinishedCard] = useState(false);
 
   return {
     allMovies, setAllMovies,
     filteredMovies, setFilteredMovies,
     movieFormYearReleased, setMovieFormYearReleased,
-    movieFormDirector, setMovieFromDirector,
+    movieFormDirector, setMovieFormDirector,
     movieFormTitle, setMovieFormTitle,
-    movieFormColor, setMovieFromColor,
+    movieFormColor, setMovieFormColor,
+    finishedCard, setFinishedCard,
   };
 }

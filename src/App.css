@@ -6,6 +6,7 @@
   --yellow: #fffead;
   --orange: #fcc252;
   --light-grey: #fdfcfa;
+  --light-grey-trans: #fdfcfadd;
   --grey: #c0c1c1;
 }
 
@@ -41,7 +42,7 @@ body{
 .container-div{
   width: 1200px;
   height: 850px;;
-  background-color: var(--light-grey);
+  background-color: var(--light-grey-trans);
   z-index: 10;
   display: flex;
   flex-wrap: wrap;
@@ -69,4 +70,18 @@ section{
 
 .current-movie-card p{
   font-size: 1.5rem;
+}
+
+label{
+  display: flex;
+  flex-direction: column;
+}
+
+label input{
+  padding: 3px, 5px;
+}
+
+.add-movie{
+  margin-top: 20px;
+  cursor: pointer;
 }
