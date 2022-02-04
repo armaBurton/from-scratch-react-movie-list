@@ -1,12 +1,15 @@
 import './App.css';
+import { useEffect } from 'react';
 import { useStateForm } from './useStateForm';
 import CurrentMovie from './CurrentMovie';
 import MovieForm from './MovieForm';
+import RenderMovies from './RenderMovies';
 
 function App() {
   const {
     allMovies, setAllMovies,
     filteredMovies, setFilteredMovies,
+    finishedCard, setFinishedCard,
     movieFormYearReleased, setMovieFormYearReleased,
     movieFormDirector, setMovieFormDirector,
     movieFormTitle, setMovieFormTitle,
@@ -14,20 +17,48 @@ function App() {
   } = useStateForm();
 
   function addMovie(newMovie){
-    setAllMovies([...allMovies, newMovie]);
-    console.log(allMovies);
+    const updateMovies = [...allMovies, newMovie];
+    setAllMovies(updateMovies);
   }
+
+  function deleteMovie(){
+    console.log('click');
+  }
+
+  // useEffect(() => {
+
+  //   if (finishedCard){
+  //     const movie = {
+  //       title: movieFormTitle,
+  //       director: movieFormDirector,
+  //       year: movieFormYearReleased,
+  //       color: movieFormColor,
+  //       card: finishedCard,
+  //     };
+
+  //     addMovie(movie);
+    
+  //     setMovieFormTitle(``);
+  //     setMovieFormDirector(``);
+  //     setMovieFormYearReleased(``);
+  //     setMovieFormColor(`transparent`);
+  //     setFinishedCard(false);
+  //   }
+    
+  // }, [finishedCard]);
 
   return <div className='container-div'>
     <section className='current-movie'>
-      <CurrentMovie movie={{
-        title: movieFormTitle,
-        director: movieFormDirector,
-        year: movieFormYearReleased,
-        color: movieFormColor,
-      }} />
+      {movieFormTitle || movieFormDirector || movieFormYearReleased ? <CurrentMovie 
+        movie={{
+          title: movieFormTitle,
+          director: movieFormDirector,
+          year: movieFormYearReleased,
+          color: movieFormColor,
+          card: finishedCard,
+        }} /> : ''}
     </section>
-    <section></section>
+    <section className='filter-section'></section>
     <section className='form-section'>
       <MovieForm 
         movieFormYearReleased={movieFormYearReleased}
@@ -38,10 +69,17 @@ function App() {
         setMovieFormTitle={setMovieFormTitle}
         movieFormColor={movieFormColor} 
         setMovieFormColor={setMovieFormColor}
+        finishedCard={finishedCard}
+        setFinishedCard={setFinishedCard}
         addMovie={addMovie}
+        deleteMovie={deleteMovie}
       />
     </section>
-    <section></section>
+    <section>
+      {
+        allMovies.length ? <RenderMovies movies={allMovies} deleteMovie={deleteMovie} /> : ''
+      }
+    </section>
   </div>;
 }
 

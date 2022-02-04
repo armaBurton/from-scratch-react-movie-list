@@ -1,41 +1,70 @@
-export default function MovieForm(props){
-  console.log(props);
+import { useEffect } from 'react';
 
-
-  function handleSubmit(e){
-    e.preventDefault();
-
+export default function MovieForm({
+  movieFormYearReleased,
+  setMovieFormYearReleased,
+  movieFormDirector,
+  setMovieFormDirector,
+  movieFormTitle,
+  setMovieFormTitle,
+  movieFormColor, 
+  setMovieFormColor,
+  finishedCard,
+  setFinishedCard,
+  addMovie,
+  deleteMovie,
+}){
+  
+  function handleSubmit(){
+    // setFinishedCard(true);
+    console.log(finishedCard);
+    
     const movie = {
-      title: props.movieFormTitle,
-      director: props.movieFormDirector,
-      year: props.movieFormYearReleased,
-      color: props.movieFormColor,
+      title: movieFormTitle,
+      director: movieFormDirector,
+      year: movieFormYearReleased,
+      color: movieFormColor,
+      card: finishedCard,
     };
-
-    props.addMovie(movie);
-
-    props.setMovieFormTitle(``);
-    props.setMovieFormDirector(``);
-    props.setMovieFormYearReleased(``);
-    props.setMovieFormColor(`transparent`);
+    
+    console.log(movie);
+    addMovie(movie);
+    
+    setMovieFormTitle(``);
+    setMovieFormDirector(``);
+    setMovieFormYearReleased(``);
+    setMovieFormColor(`transparent`);
+    setFinishedCard(false);
   }
 
-  return <form onSubmit={handleSubmit}>
+  useEffect(() => {
+    finishedCard && handleSubmit();
+    
+  }, [finishedCard]);
+
+  function setTrue(e){
+    e.preventDefault();
+    setFinishedCard(true);
+
+    // handleSubmit();
+  }
+
+  return <form onSubmit={setTrue}>
     <label>
       Title
-      <input required value={props.movieFormTitle} onChange={e => props.setMovieFormTitle(e.target.value)} />
+      <input required value={movieFormTitle} onChange={e => setMovieFormTitle(e.target.value)} />
     </label>
     <label>
       Director:
-      <input required value={props.movieFormDirector} onChange={e => props.setMovieFormDirector(e.target.value)} />
+      <input required value={movieFormDirector} onChange={e => setMovieFormDirector(e.target.value)} />
     </label>
     <label>
       Year Released:
-      <input type='number' required value={props.movieFormYearReleased} onChange={e => props.setMovieFormYearReleased(e.target.value)} />
+      <input type='number' required value={movieFormYearReleased} onChange={e => setMovieFormYearReleased(e.target.value)} />
     </label>
     <label>
       Color:
-      <select value={props.movieFormColor} onChange={e => props.setMovieFormColor(e.target.value)}>
+      <select value={movieFormColor} onChange={e => setMovieFormColor(e.target.value)}>
         <option value='transparent'></option>
         <option value='hotpink'>Hotpink</option>
         <option value='red'>Red</option>
