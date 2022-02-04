@@ -21,8 +21,12 @@ function App() {
     setAllMovies(updateMovies);
   }
 
-  function deleteMovie(){
-    // console.log('click');
+  function deleteMovie(id){
+    const index = allMovies.findIndex(movie => movie.id === id);
+    console.log(index);
+
+    allMovies.splice(index, 1);
+    setAllMovies([...allMovies]);
   }
 
   return <div className='container-div'>
@@ -35,7 +39,7 @@ function App() {
           color: movieFormColor,
           card: finishedCard,
           id:''
-        }} /> : ''}
+        }} deleteMovie={deleteMovie} /> : ''}
     </section>
     <section className='filter-section'></section>
     <section className='form-section'>
@@ -54,7 +58,7 @@ function App() {
         deleteMovie={deleteMovie}
       />
     </section>
-    <section>
+    <section className='list-section'>
       {
         allMovies.length ? <RenderMovies movies={allMovies} deleteMovie={deleteMovie} /> : ''
       }
