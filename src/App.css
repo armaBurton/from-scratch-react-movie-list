@@ -80,3 +80,8 @@ label{
 label input{
   padding: 3px, 5px;
 }
+
+.add-movie{
+  margin-top: 20px;
+  cursor: pointer;
+}

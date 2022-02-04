@@ -13,6 +13,11 @@ function App() {
     movieFormColor, setMovieFormColor,
   } = useStateForm();
 
+  function addMovie(newMovie){
+    setAllMovies([...allMovies, newMovie]);
+    console.log(allMovies);
+  }
+
   return <div className='container-div'>
     <section className='current-movie'>
       <CurrentMovie movie={{
@@ -33,6 +38,7 @@ function App() {
         setMovieFormTitle={setMovieFormTitle}
         movieFormColor={movieFormColor} 
         setMovieFormColor={setMovieFormColor}
+        addMovie={addMovie}
       />
     </section>
     <section></section>

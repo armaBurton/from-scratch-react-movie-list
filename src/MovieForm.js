@@ -1,7 +1,26 @@
 export default function MovieForm(props){
   console.log(props);
 
-  return <form>
+
+  function handleSubmit(e){
+    e.preventDefault();
+
+    const movie = {
+      title: props.movieFormTitle,
+      director: props.movieFormDirector,
+      year: props.movieFormYearReleased,
+      color: props.movieFormColor,
+    };
+
+    props.addMovie(movie);
+
+    props.setMovieFormTitle(``);
+    props.setMovieFormDirector(``);
+    props.setMovieFormYearReleased(``);
+    props.setMovieFormColor(`transparent`);
+  }
+
+  return <form onSubmit={handleSubmit}>
     <label>
       Title
       <input required value={props.movieFormTitle} onChange={e => props.setMovieFormTitle(e.target.value)} />
@@ -16,14 +35,16 @@ export default function MovieForm(props){
     </label>
     <label>
       Color:
-      <select onChange={e => props.setMovieFormColor(e.target.value)}>
-        <option value='hotpink'>hotpink</option>
-        <option value='red'>red</option>
-        <option value='cyan'>cyan</option>
-        <option value='chartreuse'>chartreuse</option>
-        <option value='orange'>orange</option>
-        <option value='blue'>blue</option>
+      <select value={props.movieFormColor} onChange={e => props.setMovieFormColor(e.target.value)}>
+        <option value='transparent'></option>
+        <option value='hotpink'>Hotpink</option>
+        <option value='red'>Red</option>
+        <option value='cyan'>Cyan</option>
+        <option value='chartreuse'>Chartreuse</option>
+        <option value='orange'>Orange</option>
+        <option value='blue'>Blue</option>
       </select>
+      <button className='add-movie'>Add Movie</button>
     </label>
   </form>;
 }
