@@ -21,9 +21,9 @@ function App() {
     setAllMovies(updateMovies);
   }
 
-  // function deleteMovie(){
-  //   console.log('click');
-  // }
+  function deleteMovie(){
+    // console.log('click');
+  }
 
   return <div className='container-div'>
     <section className='current-movie'>
