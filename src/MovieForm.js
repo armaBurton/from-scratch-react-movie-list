@@ -12,22 +12,22 @@ export default function MovieForm({
   finishedCard,
   setFinishedCard,
   addMovie,
-  deleteMovie,
+  // deleteMovie,
+  
 }){
   
   function handleSubmit(){
-    // setFinishedCard(true);
-    console.log(finishedCard);
-    
+
+    const id = `${movieFormTitle + movieFormDirector + movieFormYearReleased + movieFormColor + Math.floor(Math.random() * 9999)}`;
     const movie = {
       title: movieFormTitle,
       director: movieFormDirector,
       year: movieFormYearReleased,
       color: movieFormColor,
       card: finishedCard,
+      id: id
     };
     
-    console.log(movie);
     addMovie(movie);
     
     setMovieFormTitle(``);
@@ -37,16 +37,15 @@ export default function MovieForm({
     setFinishedCard(false);
   }
 
-  useEffect(() => {
-    finishedCard && handleSubmit();
+  // useEffect(() => {
+  //   finishedCard && handleSubmit();
     
-  }, [finishedCard]);
+  // }, [finishedCard]);
 
   function setTrue(e){
     e.preventDefault();
     setFinishedCard(true);
-
-    // handleSubmit();
+    handleSubmit();
   }
 
   return <form onSubmit={setTrue}>
