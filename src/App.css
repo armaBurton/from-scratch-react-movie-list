@@ -91,3 +91,8 @@ label input{
   gap: 10px;
   flex-wrap: wrap;
 }
+
+.filter-section{
+  display: flex;
+  flex-direction: column;
+}
