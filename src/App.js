@@ -8,7 +8,7 @@ function App() {
 
   const {
     allMovies, setAllMovies,
-    // filteredMovies, setFilteredMovies,
+    filteredMovies, setFilteredMovies,
     finishedCard, setFinishedCard,
     movieFormYearReleased, setMovieFormYearReleased,
     movieFormDirector, setMovieFormDirector,
@@ -23,10 +23,15 @@ function App() {
 
   function deleteMovie(id){
     const index = allMovies.findIndex(movie => movie.id === id);
-    console.log(index);
 
     allMovies.splice(index, 1);
     setAllMovies([...allMovies]);
+  }
+
+  function handleFilteredMovies(search){
+    const filteredMovies = allMovies.filter(movie => movie.title.includes(search));
+
+    setFilteredMovies(filteredMovies);
   }
 
   return <div className='container-div'>
@@ -39,9 +44,13 @@ function App() {
           color: movieFormColor,
           card: finishedCard,
           id:''
-        }} deleteMovie={deleteMovie} /> : ''}
+        }} 
+        deleteMovie={deleteMovie} /> : ''}
     </section>
-    <section className='filter-section'></section>
+    <section className='filter-section'>
+      <h2>Filter Movies</h2>
+      <input onChange={(e) => handleFilteredMovies(e.target.value)} />
+    </section>
     <section className='form-section'>
       <MovieForm 
         movieFormYearReleased={movieFormYearReleased}
@@ -60,8 +69,15 @@ function App() {
     </section>
     <section className='list-section'>
       {
-        allMovies.length ? <RenderMovies movies={allMovies} deleteMovie={deleteMovie} /> : ''
+        <RenderMovies movies={
+          filteredMovies.length 
+            ? filteredMovies
+            : allMovies
+        }
+        deleteMovie={deleteMovie} 
+        />
       }
+      
     </section>
   </div>;
 }
