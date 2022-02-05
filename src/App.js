@@ -3,18 +3,21 @@ import { useStateForm } from './useStateForm';
 import CurrentMovie from './CurrentMovie';
 import MovieForm from './MovieForm';
 import RenderMovies from './RenderMovies';
+import { useState, useEffect } from 'react';
 
 function App() {
 
   const {
-    allMovies, setAllMovies,
-    filteredMovies, setFilteredMovies,
     finishedCard, setFinishedCard,
     movieFormYearReleased, setMovieFormYearReleased,
     movieFormDirector, setMovieFormDirector,
     movieFormTitle, setMovieFormTitle,
     movieFormColor, setMovieFormColor,
   } = useStateForm();
+
+  const [allMovies, setAllMovies] = useState([]);
+  const [filteredMovies, setFilteredMovies] = useState([]);
+  const [currentFilter, setCurrentFilter] = useState('');
 
   function addMovie(newMovie){
     const updateMovies = [...allMovies, newMovie];
@@ -26,13 +29,23 @@ function App() {
 
     allMovies.splice(index, 1);
     setAllMovies([...allMovies]);
+
+    setCurrentFilter('');
   }
 
-  function handleFilteredMovies(search){
-    const filteredMovies = allMovies.filter(movie => movie.title.includes(search));
+  // function handleFilteredMovies(search){
+  //   const filteredMovies = allMovies.filter(movie => movie.title.includes(search));
 
-    setFilteredMovies(filteredMovies);
-  }
+  //   setFilteredMovies(filteredMovies);
+  // }
+
+  useEffect(() => {
+    const filtered = allMovies.filter(movie => movie.title.includes(currentFilter)
+    || movie.director.includes(currentFilter)
+    || movie.year.includes(currentFilter));
+
+    setFilteredMovies(filtered);
+  }, [currentFilter, allMovies]);
 
   return <div className='container-div'>
     <section className='current-movie'>
@@ -49,7 +62,8 @@ function App() {
     </section>
     <section className='filter-section'>
       <h2>Filter Movies</h2>
-      <input onChange={(e) => handleFilteredMovies(e.target.value)} />
+      <input value={currentFilter} onChange={(e) => setCurrentFilter(e.target.value)} />
+      {/* <input onChange={(e) => handleFilteredMovies(e.target.value)} /> */}
     </section>
     <section className='form-section'>
       <MovieForm 
