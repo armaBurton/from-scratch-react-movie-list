@@ -1,10 +1,10 @@
 import CurrentMovie from './CurrentMovie';
 
-export default function RenderMovies(props){
-  const deleteMovie = props.deleteMovie;
+export default function RenderMovies({ movies, deleteMovie }){
+  
   return <>
     {
-      props.movies.map((movie, i) => <CurrentMovie key={movie + i} movie={movie} deleteMovie={deleteMovie}/>)
+      movies.map((movie, i) => <CurrentMovie key={movie + i} movie={movie} deleteMovie={deleteMovie}/>)
     }
   </>;
 }
