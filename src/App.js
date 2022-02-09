@@ -58,7 +58,7 @@ function App() {
           card: finishedCard,
           id:''
         }} 
-        deleteMovie={deleteMovie} /> : ''}
+      /> : ''}
     </section>
     <section className='filter-section'>
       <h2>Filter Movies</h2>
